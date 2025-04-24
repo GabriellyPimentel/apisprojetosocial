@@ -1,7 +1,7 @@
-# 🌍 Impacto Social API  
+# 🌍 Impacto Social 
 
 ## 📌 Sobre o projeto  
-A **Impacto Social API** foi criada para organizar e disponibilizar informações sobre **projetos sociais e seu impacto ao longo do tempo**. O objetivo é permitir analises mais abrangentes, permitindo que pesquisadores, ONGs, investidores sociais e cidadãos tenham **acesso estruturado** a iniciativas que promovem mudanças positivas na sociedade.  
+A **Impacto Social** foi uma API criada para organizar e disponibilizar informações sobre **projetos sociais e seu impacto ao longo do tempo**. O objetivo é permitir analises mais abrangentes, permitindo que pesquisadores, ONGs, investidores sociais e cidadãos tenham **acesso estruturado** a iniciativas que promovem mudanças positivas na sociedade.  
 
 ### 🧐 **Problematização**  
 Muitas iniciativas sociais enfrentam dificuldades na **gestão de informações sobre impacto**. Dados sobre projetos sociais costumam estar **fragmentados**, dificultando análises sobre sua eficiência, prestação de contas e a tomada de decisões baseada em evidencias. Impossibilitando assim seu alcance e evolução.  
