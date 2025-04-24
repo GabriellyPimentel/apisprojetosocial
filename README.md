@@ -24,17 +24,11 @@ GET /projetos-impacto
 ```
 ### ⚙️ **Funcionalidade da API**  
 
-# 📌 1️⃣ Listagem de Projetos Sociais  
+# 📌 1️⃣ Listagem de Projetos Sociais 
+Este endpoint fornece o nome do projeto social registrado, a área endereçada e trás as estatísticas das ações alcançadas anualmente.
+
 ```bash
 GET /projetos-impacto  
-```
-# 📌 2️⃣ Histórico de Impacto Social
-```bash
-GET /dados-impacto-historico  
-```
-# 📌 3️⃣ Avaliação de Projetos  
-```bash
-GET /avaliacoes-projetos  
 ```
 ### 📌 **2️⃣ Histórico de Impacto Social**:
 
