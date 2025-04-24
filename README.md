@@ -17,22 +17,17 @@ Essa API de **Impacto Social** busca solucionar esse problema ao **organizar, ce
 Esta API fornece três **principais funcionalidades**:  
 
 ### 📌 **1️⃣ Listagem de Projetos Sociais**  
+
+#### 🔹 Descrição
 Permite acessar um conjunto de projetos **cadastrados**, visualizando seus objetivos e impacto gerado.  
-✅ Endpoint:  
+
+#### 🔹 Método
 ```bash
 GET /projetos-impacto
-```
-### ⚙️ **Funcionalidade da API**  
-
-# 📌 1️⃣ Listagem de Projetos Sociais 
-Este endpoint fornece o nome do projeto social registrado, a área endereçada e trás as estatísticas das ações alcançadas anualmente.
-
-```bash
-GET /projetos-impacto  
-```
+```  
 ### 📌 **2️⃣ Histórico de Impacto Social**:
 
-#### 🔹 Descrição  
+#### 🔹 Descrição 
 Este endpoint fornece estatísticas sobre o impacto social ao longo dos anos, organizando os dados por **ano** e **setor** (educação, saúde, desenvolvimento social).  
 
 #### 🔹 Método  
@@ -41,8 +36,10 @@ GET /dados-impacto-historico
 ```
 ### 📌 **3️⃣ Avaliação de Projetos**
 
-Permite analisar indicadores de desempenho e viabilizar comparações entre diferentes iniciativas. ✅ Endpoint:
+#### 🔹 Descrição
+Permite analisar indicadores de desempenho e viabilizar comparações entre diferentes iniciativas. 
 
+#### 🔹 Método
 ```bash
 GET /avaliacoes-projetos
 ```
