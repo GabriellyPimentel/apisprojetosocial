@@ -21,8 +21,22 @@ Permite acessar um conjunto de projetos **cadastrados**, visualizando seus objet
 ✅ Endpoint:  
 ```bash
 GET /projetos-impacto
+```
+### ⚙️ **Funcionalidade da API**  
 
-### 📌 **2️⃣ Histórico de Impacto Social**
+# 📌 1️⃣ Listagem de Projetos Sociais  
+```bash
+GET /projetos-impacto  
+```
+# 📌 2️⃣ Histórico de Impacto Social
+```bash
+GET /dados-impacto-historico  
+```
+# 📌 3️⃣ Avaliação de Projetos  
+```bash
+GET /avaliacoes-projetos  
+```
+### 📌 **2️⃣ Histórico de Impacto Social**:
 
 #### 🔹 Descrição  
 Este endpoint fornece estatísticas sobre o impacto social ao longo dos anos, organizando os dados por **ano** e **setor** (educação, saúde, desenvolvimento social).  
@@ -30,18 +44,19 @@ Este endpoint fornece estatísticas sobre o impacto social ao longo dos anos, or
 #### 🔹 Método  
 ```bash
 GET /dados-impacto-historico
-
+```
 ### 📌 **3️⃣ Avaliação de Projetos**
 
 Permite analisar indicadores de desempenho e viabilizar comparações entre diferentes iniciativas. ✅ Endpoint:
 
 ```bash
 GET /avaliacoes-projetos
-
+```
 ### 🛠 **Estrutura do projeto**
 
 impacto-social-api/
 │── src/
+
 │   ├── routes/            # Define as rotas da API  
 │   ├── controllers/       # Lógica de negócios das rotas  
 │   ├── models/            # Modelos de dados  
