@@ -1,15 +1,7 @@
-// Definição de um array que armazena informações sobre projetos de impacto social
+const dadosImpactoHistorico = [
+    { ano: 2023, area: 'Educação', impacto: '10 mil estudantes alcançados' },
+    { ano: 2024, area: 'Saúde', impacto: '190 milhões de pessoas atendidas' },
+    { ano: 2020, area: 'Desenvolvimento social', impacto: '150 milhões de pessoas atendidas' },
+];
 
-const projetosImpacto = [
-
-    /// nome do projeto, finalidade do projeto e resultados positivos realizados
-
-    { nome: 'Todos pela Educação', objetivo: 'Garantir acesso à educação básica', impacto: '5 mil crianças atendidas' }, 
-    { nome: 'Sistema Unico de Saude', objetivo: 'Oferecer atendimento médico gratuito', impacto: '1,4 bilhão de consultas realizadas' },
-    { nome: 'Amigos do Bem', objetivo: 'Aprimorar a educação e saude no nordeste', impacto: '450 mil cestas básicas distribuidas' }
-  ];
-  
-  // Exporta o array para que possa ser utilizado em outros arquivos do projeto
-  
-  module.exports = projetosImpacto;
-  
+module.exports = dadosImpactoHistorico;

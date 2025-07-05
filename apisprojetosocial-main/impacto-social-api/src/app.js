@@ -1,7 +1,20 @@
 
+ const express = require('express');
+const cors = require('cors');
+const app = express();
+
+// Configurar CORS
+app.use(cors({
+    origin: ['http://localhost:3001', 'http://localhost:3000'], // URLs do frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
+
+// Middleware para JSON
+app.use(express.json());
+ 
  // Vai importar o Express para criar o servidor e iniciar o servidor.
 const express = require('express');
-const app = express();
 
 // Define a porta do servidor
 const port = process.env.PORT || 3000;
