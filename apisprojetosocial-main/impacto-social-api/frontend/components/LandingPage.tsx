@@ -9,7 +9,6 @@ import {
   Target,
   ChevronDown,
   Star,
-  BarChart3,
   Globe
 } from 'lucide-react';
 
@@ -32,23 +31,28 @@ interface Avaliacao {
   nota: number;
 }
 
-// Componente principal da Landing Page
 const LandingPage: React.FC = () => {
   const [projetos, setProjetos] = useState<Projeto[]>([]);
   const [historico, setHistorico] = useState<ImpactoHistorico[]>([]);
   const [avaliacoes, setAvaliacoes] = useState<Avaliacao[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // Função para consumir a API
   const fetchData = async () => {
     try {
-      const API_BASE = 'http://localhost:3000';
+      const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
       
       const [projetosRes, historicoRes, avaliacoesRes] = await Promise.all([
         fetch(`${API_BASE}/projetos-impacto`),
         fetch(`${API_BASE}/dados-impacto-historico`),
         fetch(`${API_BASE}/avaliacoes-projetos`)
       ]);
+
+      // Verificar se as respostas são válidas
+      if (!projetosRes.ok || !historicoRes.ok || !avaliacoesRes.ok) {
+        throw new Error('Erro ao carregar dados da API');
+      }
 
       const projetosData = await projetosRes.json();
       const historicoData = await historicoRes.json();
@@ -59,6 +63,7 @@ const LandingPage: React.FC = () => {
       setAvaliacoes(avaliacoesData.avaliacoes || []);
     } catch (error) {
       console.error('Erro ao carregar dados:', error);
+      setError('Erro ao carregar dados. Verifique se a API está rodando.');
     } finally {
       setLoading(false);
     }
@@ -86,7 +91,32 @@ const LandingPage: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-blue-600 font-medium">Carregando dados...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-red-100 flex items-center justify-center">
+        <div className="text-center p-8 bg-white rounded-lg shadow-lg max-w-md">
+          <div className="text-red-500 mb-4">
+            <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Erro de Conexão</h2>
+          <p className="text-gray-600 mb-4">{error}</p>
+          <button 
+            onClick={fetchData}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors"
+          >
+            Tentar Novamente
+          </button>
+        </div>
       </div>
     );
   }
@@ -165,7 +195,9 @@ const LandingPage: React.FC = () => {
               transition={{ delay: 0.6 }}
               className="flex justify-center"
             >
-              <ChevronDown className="h-8 w-8 animate-bounce" />
+              <ChevronDown className="h-8 w-8 animate-bounce cursor-pointer" onClick={() => {
+                document.getElementById('projetos')?.scrollIntoView({ behavior: 'smooth' });
+              }} />
             </motion.div>
           </div>
         </div>

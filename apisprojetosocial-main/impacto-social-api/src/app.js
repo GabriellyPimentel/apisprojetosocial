@@ -1,43 +1,39 @@
-
- const express = require('express');
+const express = require('express');
 const cors = require('cors');
+
 const app = express();
 
 // Configurar CORS
 app.use(cors({
-    origin: ['http://localhost:3001', 'http://localhost:3000'], // URLs do frontend
+    origin: ['http://localhost:3001', 'http://localhost:3000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
 
 // Middleware para JSON
 app.use(express.json());
- 
- // Vai importar o Express para criar o servidor e iniciar o servidor.
-const express = require('express');
 
 // Define a porta do servidor
 const port = process.env.PORT || 3000;
 
-// Importação das rotas definidas em arquivos separados
+// Importação das rotas
+const projetosRoutes = require('./routes/projetosRoutes');
+const impactoHistoricoRoutes = require('./routes/impactoHistoricoRoutes');
+const avaliacoesRoutes = require('./routes/avaliacoesRoutes');
 
-const projetosRoutes = require('./routes/projetosRoutes'); // rotas para os projetos sociais
-const impactoHistoricoRoutes = require('./routes/impactoHistoricoRoutes'); // rotas para os historicos de impacto de cada projeto 
-const avaliacoesRoutes = require('./routes/avaliacoesRoutes'); // rotas para avaliações de cada projeto
+// Define os endpoints da API
+app.use('/projetos-impacto', projetosRoutes);
+app.use('/dados-impacto-historico', impactoHistoricoRoutes);
+app.use('/avaliacoes-projetos', avaliacoesRoutes);
 
-// Define os endpoints da API e vincula cada conjunto de rotas ao seu respectivo caminho.
-
-app.use('/projetos-impacto', projetosRoutes); // Gerencia os projetos sociais
-app.use('/dados-impacto-historico', impactoHistoricoRoutes); // retorna o historico do impacto social do projeto
-app.use('/avaliacoes-projetos', avaliacoesRoutes); // registra avaliações de cada projeto
-
-// Endpoint principal "/" para exibir uma mensagem quando o servidor estiver rodando
-
+// Endpoint principal
 app.get('/', (req, res) => {
     res.send('🚀 API de Impacto Social rodando!');
 });
 
-// Inicializa o servidor e faz ele escutar requisições na porta definida
+// Inicializa o servidor
 app.listen(port, () => {
-  console.log(`🚀 API rodando em http://localhost:${port}`);
+    console.log(`🚀 API rodando em http://localhost:${port}`);
 });
+
+module.exports = app; // Para testes
