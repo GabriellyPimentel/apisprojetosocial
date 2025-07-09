@@ -5,7 +5,7 @@ const avaliacoes = [
 ];
 
 exports.listarAvaliacoes = (req, res) => {
-    res.json({
+    res.status(200).json({
         mensagem: 'Avaliações dos projetos sociais.',
         avaliacoes: avaliacoes,
     });

@@ -41,7 +41,7 @@ const LandingPage: React.FC = () => {
   // Função para consumir a API
   const fetchData = async () => {
     try {
-      const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+      const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
       
       const [projetosRes, historicoRes, avaliacoesRes] = await Promise.all([
         fetch(`${API_BASE}/projetos-impacto`),
@@ -63,7 +63,7 @@ const LandingPage: React.FC = () => {
       setAvaliacoes(avaliacoesData.avaliacoes || []);
     } catch (error) {
       console.error('Erro ao carregar dados:', error);
-      setError('Erro ao carregar dados. Verifique se a API está rodando.');
+      setError('Erro ao carregar dados. Verifique se a API está rodando na porta 3001.');
     } finally {
       setLoading(false);
     }
@@ -73,7 +73,7 @@ const LandingPage: React.FC = () => {
     fetchData();
   }, []);
 
-  // Animações Framer Motion
+  // Animações Framer Motion - CORRIGIDAS
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     animate: { opacity: 1, y: 0 },
@@ -81,11 +81,18 @@ const LandingPage: React.FC = () => {
   };
 
   const staggerChildren = {
+    initial: {},
     animate: {
       transition: {
         staggerChildren: 0.1
       }
     }
+  };
+
+  // Variante para itens individuais
+  const itemVariant = {
+    initial: { opacity: 0, y: 60 },
+    animate: { opacity: 1, y: 0 }
   };
 
   if (loading) {
@@ -154,7 +161,9 @@ const LandingPage: React.FC = () => {
         <div className="container mx-auto px-6">
           <div className="text-center text-white">
             <motion.h1 
-              {...fadeInUp}
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
               className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
             >
               Transformando Vidas
@@ -163,8 +172,9 @@ const LandingPage: React.FC = () => {
             </motion.h1>
             
             <motion.p 
-              {...fadeInUp}
-              transition={{ delay: 0.2 }}
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto"
             >
               Descubra como nossos projetos sociais estão criando mudanças positivas 
@@ -172,8 +182,9 @@ const LandingPage: React.FC = () => {
             </motion.p>
             
             <motion.div 
-              {...fadeInUp}
-              transition={{ delay: 0.4 }}
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
               className="flex flex-wrap justify-center gap-4 mb-12"
             >
               <div className="bg-white/10 backdrop-blur-md rounded-lg p-4 flex items-center space-x-2">
@@ -191,8 +202,9 @@ const LandingPage: React.FC = () => {
             </motion.div>
             
             <motion.div 
-              {...fadeInUp}
-              transition={{ delay: 0.6 }}
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
               className="flex justify-center"
             >
               <ChevronDown className="h-8 w-8 animate-bounce cursor-pointer" onClick={() => {
@@ -207,7 +219,10 @@ const LandingPage: React.FC = () => {
       <section id="projetos" className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
           <motion.div 
-            {...fadeInUp}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -228,7 +243,7 @@ const LandingPage: React.FC = () => {
             {projetos.map((projeto, index) => (
               <motion.div
                 key={index}
-                variants={fadeInUp}
+                variants={itemVariant}
                 className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow group"
               >
                 <div className="text-center">
@@ -253,7 +268,10 @@ const LandingPage: React.FC = () => {
       <section id="historico" className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <motion.div 
-            {...fadeInUp}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -274,7 +292,7 @@ const LandingPage: React.FC = () => {
             {historico.map((item, index) => (
               <motion.div
                 key={index}
-                variants={fadeInUp}
+                variants={itemVariant}
                 className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 border border-blue-100"
               >
                 <div className="flex flex-col md:flex-row items-center justify-between">
@@ -301,7 +319,10 @@ const LandingPage: React.FC = () => {
       <section id="avaliacoes" className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
           <motion.div 
-            {...fadeInUp}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -322,7 +343,7 @@ const LandingPage: React.FC = () => {
             {avaliacoes.map((avaliacao, index) => (
               <motion.div
                 key={avaliacao.id}
-                variants={fadeInUp}
+                variants={itemVariant}
                 className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow"
               >
                 <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
