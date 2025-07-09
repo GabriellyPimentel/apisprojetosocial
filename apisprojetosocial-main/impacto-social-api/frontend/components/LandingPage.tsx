@@ -40,38 +40,51 @@ const LandingPage: React.FC = () => {
 
   // Função para consumir a API
   const fetchData = async () => {
-    try {
-      const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-      
-      const [projetosRes, historicoRes, avaliacoesRes] = await Promise.all([
-        fetch(`${API_BASE}/projetos-impacto`),
-        fetch(`${API_BASE}/dados-impacto-historico`),
-        fetch(`${API_BASE}/avaliacoes-projetos`)
-      ]);
+  try {
+    // Base da API configurável via variável de ambiente
+    const API_BASE =
+      process.env.NEXT_PUBLIC_API_URL?.trim() || 'http://localhost:3001';
 
-      // Verificar se as respostas são válidas
-      if (!projetosRes.ok || !historicoRes.ok || !avaliacoesRes.ok) {
-        throw new Error('Erro ao carregar dados da API');
-      }
-
-      const projetosData = await projetosRes.json();
-      const historicoData = await historicoRes.json();
-      const avaliacoesData = await avaliacoesRes.json();
-
-      setProjetos(projetosData.projetos || []);
-      setHistorico(historicoData.historico || []);
-      setAvaliacoes(avaliacoesData.avaliacoes || []);
-    } catch (error) {
-      console.error('Erro ao carregar dados:', error);
-      setError('Erro ao carregar dados. Verifique se a API está rodando na porta 3001.');
-    } finally {
-      setLoading(false);
+    // Checar se URL base está correta (evita espaços em branco ou erro de digitação)
+    if (!API_BASE.startsWith('http')) {
+      throw new Error('URL da API inválida');
     }
-  };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+    // Chamadas paralelas às rotas
+    const [projetosRes, historicoRes, avaliacoesRes] = await Promise.all([
+      fetch(`${API_BASE}/projetos-impacto`),
+      fetch(`${API_BASE}/dados-impacto-historico`),
+      fetch(`${API_BASE}/avaliacoes-projetos`)
+    ]);
+
+    // Verifica se todas as respostas foram bem-sucedidas
+    if (!projetosRes.ok || !historicoRes.ok || !avaliacoesRes.ok) {
+      throw new Error('Erro ao carregar dados da API');
+    }
+
+    // Converte os dados
+    const projetosData = await projetosRes.json();
+    const historicoData = await historicoRes.json();
+    const avaliacoesData = await avaliacoesRes.json();
+
+    // Atualiza os estados
+    setProjetos(projetosData.projetos ?? []);
+    setHistorico(historicoData.historico ?? []);
+    setAvaliacoes(avaliacoesData.avaliacoes ?? []);
+  } catch (error) {
+    console.error('Erro ao carregar dados:', error);
+    setError(
+      'Erro ao carregar dados. Verifique se a API está rodando em http://localhost:3001 e se as rotas estão corretas.'
+    );
+  } finally {
+    setLoading(false);
+  }
+};
+
+useEffect(() => {
+  fetchData();
+}, []);
+
 
   // Animações Framer Motion - CORRIGIDAS
   const fadeInUp = {
