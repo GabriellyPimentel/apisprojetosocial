@@ -2,10 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  output: 'export', 
   images: {
     domains: ['localhost'],
   },
-  // Configuração para fontes externas
   async rewrites() {
     return [
       {
