@@ -4,15 +4,24 @@ const cors = require('cors');
 const app = express();
 
 // ✅ Configurar CORS para produção e desenvolvimento
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:3002',
+  'https://apisprojetosocial-1u6r.vercel.app'
+];
+
 app.use(cors({
-  origin: [
-    'http://localhost:3002',
-    'http://localhost:3000',
-    'https://apisprojetosocial-1u6r.vercel.app' // Frontend publicado
-  ],
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Origin ${origin} not allowed by CORS`));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
+
 
 // ✅ Middleware para interpretar JSON
 app.use(express.json());
