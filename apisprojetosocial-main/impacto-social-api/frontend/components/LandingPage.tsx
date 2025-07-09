@@ -42,7 +42,7 @@ const LandingPage: React.FC = () => {
   const fetchData = async () => {
     try {
       // Base da API
-      const API_BASE = 'http://localhost:3001';
+      const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
       // Chamadas paralelas às rotas
       const [projetosRes, historicoRes, avaliacoesRes] = await Promise.all([
