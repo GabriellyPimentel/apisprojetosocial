@@ -26,15 +26,5 @@
     "postcss": "^8.4.31",
     "eslint": "^8.0.0",
     "eslint-config-next": "^14.0.0"
-  },
-  "keywords": [
-    "nextjs",
-    "react",
-    "typescript",
-    "tailwindcss",
-    "social-impact",
-    "landing-page"
-  ],
-  "author": "GabriellyPimentel",
-  "license": "MIT"
+  }
 }
