@@ -5,7 +5,7 @@ const app = express();
 
 // Configurar CORS
 app.use(cors({
-    origin: ['http://localhost:3001', 'http://localhost:3000'],
+    origin: ['http://localhost:3002', 'http://localhost:3000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 });
 
 // Define a porta do servidor
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 // Importação das rotas
 const projetosRoutes = require('./routes/projetosRoutes');
